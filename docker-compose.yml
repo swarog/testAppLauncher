@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  testserver:
+    image: swarogdark/server-test:latest
+    env_file:
+      - ./.env
+    networks:
+      - testapp
+  testui:
+    image: swarogdark/test-ui:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      - testserver
+    networks:
+      - testapp
+networks:
+  testapp:
